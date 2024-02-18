@@ -1,4 +1,8 @@
-from subprocess import call
+from config import MainSettings
 
-call(["python", "main.py"])
+# Create an instance of the MainSettings class
+settings = MainSettings()
 
+settings.proc_dir_name = "newtest"
+
+print(settings.proc_dir_name)
