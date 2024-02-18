@@ -14,16 +14,24 @@ configini=ConfigParser(comment_prefixes='', allow_no_value=True)
 configini.read('config.ini')
 
 def main_run():
-    loading_label = tk.Label(rt, text="Loading...")
-    loading_label.grid(row=2, pady=10, padx=10)
-    rt.update_idletasks()
     video_path_from_entry = video_path_entry.get()
-    with open("config.ini", "w") as ow:
-        configini.set("MainSettings", "video_file_path", video_path_from_entry)
-        configini.write(ow)
-    call(["python", "main.py"])
-    print("Ran main script")
-    loading_label.destroy()
+    if video_path_from_entry != '':
+        if video_path_from_entry.isspace() is False:
+            loading_label = tk.Label(rt, text="Loading...")
+            loading_label.grid(row=2, pady=10, padx=10)
+            rt.update_idletasks()
+            with open("config.ini", "w") as ow:
+                configini.set("MainSettings", "video_file_path", video_path_from_entry)
+                configini.write(ow)
+            call(["python", "main.py"])
+            print("Ran main script")
+            loading_label.destroy()
+        else:
+            print("Failed: Path can't only contain spaces")
+            return 0
+    else:
+        print("Failed: No entry")
+        return 0
 
 def select_video():
     video_path = filedialog.askopenfilename()
@@ -38,6 +46,7 @@ button_start.grid(row=1, pady=10, padx=10)
 
 video_path_label = tk.Label(rt, text="Video path").grid(row=0, column=1)
 video_path_entry = tk.Entry(rt, width=60)
+video_path_entry.insert(0, configini.get("MainSettings", "video_file_path"))
 video_path_entry.grid(row=1, column=1)
 save_button = tk.Button(rt, text="Browse", command=select_video).grid(row=1, column=2)
 
