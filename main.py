@@ -34,9 +34,9 @@ cwd_name = "lightning-finder"
 processing_dir_name = configini.get("MainSettings","proc_dir_name")
 processing_dir = cwd / processing_dir_name
 
-#defining video file name
-video_file_name = configini.get("MainSettings","video_file_name")
-print(f"Video to process: {video_file_name}")
+#defining video file path
+video_file_path = configini.get("MainSettings", "video_file_path")
+print(f"Video to process: {video_file_path}")
 
 #checking if processing folder doesn't exist; if it doesn't, create it
 print("Checking for the existance of processing folder...")
@@ -64,13 +64,13 @@ ffmpeg_output = f"{processing_dir}/%d.png"
 
 #running ffmpeg command to split video in frames
 if configini.getboolean("MainSettings","custom_frameres") is True:
-    functions.ffmpeg_custom_frameres(ffmpeg_output, video_file_name, configini.get("MainSettings","frame_res"))
+    functions.ffmpeg_custom_frameres(ffmpeg_output, video_file_path, configini.get("MainSettings","frame_res"))
 else:
-    functions.ffmpeg_normal(ffmpeg_output, video_file_name)
+    functions.ffmpeg_normal(ffmpeg_output, video_file_path)
 
 
 #getting video's FPS
-fpsfind = cv2.VideoCapture(video_file_name)
+fpsfind = cv2.VideoCapture(video_file_path)
 fps = fpsfind.get(cv2.CAP_PROP_FPS)
 fps = round(fps, 3)
 print(f"\nFps: {fps}")
