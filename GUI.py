@@ -2,6 +2,8 @@ import tkinter as tk
 from subprocess import call
 from tkinter import filedialog
 from configparser import ConfigParser
+from tkinter import ttk
+
 
 rt = tk.Tk()
 rt.geometry("500x300")
