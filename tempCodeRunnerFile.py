@@ -1,3 +1,6 @@
-rt.columnconfigure(0, weight=1)
-# rt.columnconfigure(1, weight=1)
-# rt.rowconfigure(0, weight=1)
+import validators
+
+
+while True:
+    link = input()
+    print(validators.url(link))
