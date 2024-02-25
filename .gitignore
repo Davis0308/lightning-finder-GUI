@@ -5,3 +5,4 @@ test.py
 testold1.py
 GUI_without_tabs.py
 default_config.ini
+__pycache__
